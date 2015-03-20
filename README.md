@@ -17,7 +17,7 @@ git clone https://github.com/zerasul/BullyingApp.git
 
 Esta aplicación simplemente muestra una serie de ALumnos a los que se pueden poner puntos negativos. Cada uno tendrá un nombre y un dibujo que lo identifica.
 Es necesario tener la aplicación servidor donde se usará la API REST que nos dará los datos y nos permitirá dar puntos. 
-La Aplicación servidor se encuentra en [Este Repositorio]()
+La Aplicación servidor se encuentra en [Este Repositorio](https://github.com/zerasul/BullyingAPI)
 
 Para cambiar la URL a la que se conecta debe cambiar las URL en el código Javascript de las funciones ```getBullyngRanking()``` e ```insertarVoto(iduser)```.
 
