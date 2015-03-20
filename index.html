@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Bullying</title>
+		<meta name="viewport"
+    content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <script type="text/javascript" src="components/webcomponentsjs/webcomponents.js"></script>
+     <link rel="import" hred="components/core-header-panel/core-header-panel">
+    <link rel="import"  href="components/core-toolbar/core-toolbar.html">
+    <link rel="import" href="components/font-roboto/roboto.html">
+    <link rel="import" href="repos/repo-card.html">
+    <link rel="import" href="components/core-image/core-image.html">
+    <style type="text/css">
+    	htm,body{
+    		font-family: "RobotoDraft",sans-serif;
+    		height: 100%;
+ 		    margin: 0;
+ 		    background-color: #E5E5E5;
+    	}
+    	core-toolbar{
+    		background: #536dfe;
+    		color: white;
+    	}
+    </style>
+</head>
+<body unresolved>
+	<core-header-panel mode="waterfall">
+		<core-toolbar>
+			<h3>BullyingApp</h3>
+		</core-toolbar>
+		<div class="container" layout vertical center>
+      <p>Ranking de Bullying del Master en Ingenier&iacute;a Inform&aacute;tica</p>
+      <p>Pulsa en el nombre para a&ntilde;adir 1 punto de Bullying.</p>
+      <div id="rankigs" layout horizontal center>
+
+      </div>
+
+		</div>
+    <p style="margin-left:30px;">&copy; 2015. Made With <a href="https://www.polymer-project.org/">Polymer </a></p>
+	</core-header-panel>
+</body>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script type="text/javascript">
+  function getBullyngRanking(){
+    var urlAPI= 'http://rpbian.ddns.net/bullyingAPI/index.php/hola';
+
+    $.ajax({url: urlAPI,
+      dataType: 'json',
+      success: function(data){
+        
+        var elemento='';
+        $.each(data,function(index,element){
+            elemento +='<repo-card><a href=\'Javascript:insertarVoto('+element.idusuario+')\'><h3>'+element.nombre+'</h3></a>';
+            elemento +='<core-image src="http://www.gravatar.com/avatar/'+element.hash+'?d=wavatar"></core-image>';
+            elemento += '<p>'+element.votos+'</p></repo-card>';
+        });
+        
+        $('#rankigs').html(elemento);
+      }});
+
+  }
+  function insertarVoto(iduser){
+     var urlAPI= 'http://rpbian.ddns.net/bullyingAPI/index.php/hola';
+     
+    $.ajax({url: urlAPI,
+      method: 'post',
+      data: {idusuario: iduser},
+      dataType: 'json',
+      complete: function(jqXHR, textStatus){
+        getBullyngRanking();
+      }
+
+  });
+  }
+  document.addEventListener('DOMContentLoaded', function(event) {
+        getBullyngRanking();
+
+    });
+</script>
+</html>

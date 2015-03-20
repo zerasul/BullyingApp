@@ -1,0 +1,31 @@
+<link rel="import" href="../components/polymer/polymer.html">
+<link rel="import" href="../components/core-ajax/core-ajax.html">
+<polymer-element name="repo-service" attributes="repos,user">
+<template>
+	<style type="text/css">
+		:hosts:{
+			display: none;
+		}
+	</style>
+	<core-ajax id="ajax" url="http://api.github.com/users/{{user}}/repos"
+		handleAs="json"
+		auto
+		on-core-response = "{{reposLoaded}}"
+	hidden>
+	</core-ajax>
+</template>
+
+<script type="text/javascript">
+	Polymer('repo-service',{
+		created: function(){
+			this.repos = [];
+		},
+		reposLoaded:function(){
+			this.respos = this.$.ajax.response.slice(0);
+			console.log(this.$.ajax.url);
+			console.log("Hola");
+			console.log(this.respos);
+		}
+	});
+</script>
+</polymer-element>

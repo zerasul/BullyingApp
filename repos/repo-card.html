@@ -1,0 +1,46 @@
+<link rel="import" href="../components/polymer/polymer.html">
+<link rel="import" href="../components/core-image/core-image.html">
+<polymer-element name="repo-card" attributes="iduser">
+	<template>
+		<style type="text/css">
+			:host{
+				display: block;
+				position: relative;
+				background-color: white;
+				border-radius: 5px;
+				margin-bottom: 10px;
+				width: 100%;
+				margin-left: 10px;
+				float:left;
+			}
+			:host a{
+				margin-left: 20px;
+			}
+			:host .repo-card-header core-image{
+				
+				border-radius: 10px;
+
+			}
+			:host .repo-card-header p{
+				margin-right: 20px;
+				padding-left: 30px;
+			}
+		.repo-card-header{
+				margin-bottom: 20px;
+				width:90%;
+				padding-left: 50px;
+			}
+		</style>
+		<div layout vertical>
+			<content select="a"><content select="h3"></content></content>
+		<div class="repo-card-header" layout horizontal center>
+			<content select="core-image" ></content>
+		<content select="p"></content> 
+		</div>
+		</div>
+	</template>
+
+<script type="text/javascript">
+	Polymer({});
+</script>
+</polymer-element>

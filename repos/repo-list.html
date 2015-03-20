@@ -1,0 +1,44 @@
+<link rel="import" href="../components/polymer/polymer.html">
+<link rel="import" href="../components/core-ajax/core-ajax.html">
+<link rel="import" href="repo-card.html">
+<polymer-element name="repo-list" attributes="user">
+<template>
+	<style type="text/css">
+		:hosts{
+			display: block;
+			width: 100%;
+		}
+		:hosts repo-card{ padding: 5px; };
+	</style>
+	<core-ajax id="ajax" url="http://api.github.com/users/{{user}}/repos"
+		handleAs="json"
+		auto
+		on-core-response = "{{reposLoaded}}"
+	hidden>
+	</core-ajax>
+<div layout vertical center>
+
+<template repeat="{{repo in repos}}">
+	<repo-card>
+		<a href="{{repo.html_url}}"><h3>{{repo.name}}</h3></a>
+		<img src="{{repo.owner.avatar_url}}" width="70" height="70">
+		<p>{{repo.description}}</p>
+	</repo-card>
+</template>
+</div>
+</template>
+<script type="text/javascript">
+	Polymer('repo-list',{
+    created: function(){
+    	this.repos = [];
+     
+    },
+    reposLoaded:function(){
+			this.respos = this.$.ajax.response.slice(0);
+			console.log(this.$.ajax.url);
+			console.log("Hola");
+			console.log(this.respos);
+		}
+});
+</script>
+</polymer-element>
